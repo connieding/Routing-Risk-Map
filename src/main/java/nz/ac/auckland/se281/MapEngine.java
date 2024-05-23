@@ -42,7 +42,11 @@ public class MapEngine {
 
       // Print the country information
       try {
-        printCountryInfo(countryInput);
+        Country country = checkCountryName(countryInput);
+        MessageCli.COUNTRY_INFO.printMessage(
+            country.getCountryName(),
+            country.getContinent(),
+            Integer.toString(country.getTaxFees()));
         break;
       } catch (CountryNotFoundException e) {
         System.out.println(e.getMessage());
@@ -51,17 +55,19 @@ public class MapEngine {
   }
 
   /** this method is invoked when the user run the command route. */
-  public void showRoute() {}
+  public void showRoute() {
+    MessageCli.INSERT_SOURCE.printMessage();
+    String startCountry = Utils.scanner.nextLine();
 
-  public void printCountryInfo(String countryInput) throws CountryNotFoundException {
+    MessageCli.INSERT_DESTINATION.printMessage();
+    String endCountry = Utils.scanner.nextLine();
+  }
+
+  public Country checkCountryName(String countryInput) throws CountryNotFoundException {
     // Print out the country information
     for (Country country : countryInfo) {
       if (country.getCountryName().equals(countryInput)) {
-        MessageCli.COUNTRY_INFO.printMessage(
-            country.getCountryName(),
-            country.getContinent(),
-            Integer.toString(country.getTaxFees()));
-        return;
+        return country;
       }
     }
 
