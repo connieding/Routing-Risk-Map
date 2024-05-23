@@ -10,6 +10,9 @@ import java.util.Set;
 public class MapEngine {
   Graph<Country> countryGraph = new Graph<>();
   Set<Country> countryInfo = new HashSet<>();
+  Set<String> continentNames = new LinkedHashSet<>();
+  List<String> countryNames = new ArrayList<>();
+  int totalTax = 0;
   Country beginCountry;
   Country finalCountry;
 
@@ -31,6 +34,7 @@ public class MapEngine {
       String countryContinent = countryData[1].trim();
       int countryTax = Integer.parseInt(countryData[2].trim());
 
+      // Add the country to the countryInfo and countryGraph
       countryInfo.add(new Country(countryName, countryContinent, countryTax));
       countryGraph.addNode(new Country(countryName, countryContinent, countryTax));
     }
@@ -39,6 +43,7 @@ public class MapEngine {
     for (String adjacency : adjacencies) {
       String[] adjacencyData = adjacency.split(",");
 
+      // Add the edges to the graph
       for (String adjCountry : adjacencyData) {
         try {
           countryGraph.addEdge(
@@ -109,14 +114,12 @@ public class MapEngine {
     // Find the shortest path between the two countries
     List<Country> countriesVisited = countryGraph.shortestPath(beginCountry, finalCountry);
 
+    // If the countriesVisited list is empty, then no path exists
     if (countriesVisited.size() == 1) {
       MessageCli.NO_CROSSBORDER_TRAVEL.printMessage();
       return;
     } else {
       // Print the route information
-      List<String> countryNames = new ArrayList<>();
-      Set<String> continentNames = new LinkedHashSet<>();
-      int totalTax = 0;
       for (Country country : countriesVisited) {
         countryNames.add(country.getCountryName());
         continentNames.add(country.getContinent());
@@ -132,6 +135,7 @@ public class MapEngine {
 
   public Country checkCountryName(String countryInput) throws CountryNotFoundException {
 
+    // Check if the user country input exists in the countryInfo set
     for (Country country : countryInfo) {
       if (country.getCountryName().equals(countryInput)) {
         return country;
