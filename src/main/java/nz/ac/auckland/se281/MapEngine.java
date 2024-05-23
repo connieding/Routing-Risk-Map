@@ -38,7 +38,16 @@ public class MapEngine {
     MessageCli.INSERT_COUNTRY.printMessage();
     String countryInput = Utils.scanner.nextLine();
 
-    System.out.println("Country Name: " + countryInput);
+    // Print out the country information
+    for (Country country : countryInfo) {
+      if (country.getCountryName().equals(countryInput)) {
+        MessageCli.COUNTRY_INFO.printMessage(
+            country.getCountryName(),
+            country.getContinent(),
+            Integer.toString(country.getTaxFees()));
+        return;
+      }
+    }
   }
 
   /** this method is invoked when the user run the command route. */
