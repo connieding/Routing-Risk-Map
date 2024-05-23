@@ -112,13 +112,17 @@ public class MapEngine {
     // need to get the country names from the list of Country objects
     List<String> countryNames = new ArrayList<>();
     Set<String> continentNames = new LinkedHashSet<>();
+    int totalTax = 0;
     for (Country country : countriesVisited) {
       countryNames.add(country.getCountryName());
       continentNames.add(country.getContinent());
+      totalTax += country.getTaxFees();
     }
+    totalTax -= beginCountry.getTaxFees();
 
     MessageCli.ROUTE_INFO.printMessage("[" + String.join(", ", countryNames) + "]");
     MessageCli.CONTINENT_INFO.printMessage("[" + String.join(", ", continentNames) + "]");
+    MessageCli.TAX_INFO.printMessage(Integer.toString(totalTax));
   }
 
   public Country checkCountryName(String countryInput) throws CountryNotFoundException {
