@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -106,6 +107,14 @@ public class MapEngine {
 
     // Find the shortest path between the two countries
     List<Country> countriesVisited = countryGraph.shortestPath(beginCountry, finalCountry);
+
+    // need to get the country names from the list of Country objects
+    List<String> countryNames = new ArrayList<>();
+    for (Country country : countriesVisited) {
+      countryNames.add(country.getCountryName());
+    }
+
+    MessageCli.ROUTE_INFO.printMessage("[" + String.join(", ", countryNames) + "]");
   }
 
   public Country checkCountryName(String countryInput) throws CountryNotFoundException {

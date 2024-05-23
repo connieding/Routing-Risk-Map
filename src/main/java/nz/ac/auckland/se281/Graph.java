@@ -33,10 +33,16 @@ public class Graph<Country> {
     while (!queue.isEmpty()) {
       Country currentCountry = queue.poll();
       for (Country country : adjacencyCountry.get(currentCountry)) {
-        if (!visited.contains(country)) {
+
+        if (country.equals(destination)) {
           visited.add(country);
-          queue.add(country);
+          return visited;
         }
+
+        // if (!visited.contains(country)) {
+        //   visited.add(country);
+        //   queue.add(country);
+        // }
       }
     }
     return visited;
