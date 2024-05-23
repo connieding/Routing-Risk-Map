@@ -33,6 +33,12 @@ public class MapEngine {
   /** this method is invoked when the user run the command info-country. */
   public void showInfoCountry() {
     // add code here
+
+    // Ask the user to enter the country name
+    MessageCli.INSERT_COUNTRY.printMessage();
+    String countryInput = Utils.scanner.nextLine();
+
+    System.out.println("Country Name: " + countryInput);
   }
 
   /** this method is invoked when the user run the command route. */
