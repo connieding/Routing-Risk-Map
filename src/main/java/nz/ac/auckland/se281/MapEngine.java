@@ -34,10 +34,26 @@ public class MapEngine {
   public void showInfoCountry() {
     // add code here
 
-    // Ask the user to enter the country name
-    MessageCli.INSERT_COUNTRY.printMessage();
-    String countryInput = Utils.scanner.nextLine();
+    while (true) {
+      // Ask the user to enter the country name
+      MessageCli.INSERT_COUNTRY.printMessage();
+      String countryInput = Utils.scanner.nextLine();
+      countryInput = Utils.capitalizeFirstLetterOfEachWord(countryInput);
 
+      // Print the country information
+      try {
+        printCountryInfo(countryInput);
+        break;
+      } catch (CountryNotFoundException e) {
+        System.out.println(e.getMessage());
+      }
+    }
+  }
+
+  /** this method is invoked when the user run the command route. */
+  public void showRoute() {}
+
+  public void printCountryInfo(String countryInput) throws CountryNotFoundException {
     // Print out the country information
     for (Country country : countryInfo) {
       if (country.getCountryName().equals(countryInput)) {
@@ -48,8 +64,7 @@ public class MapEngine {
         return;
       }
     }
-  }
 
-  /** this method is invoked when the user run the command route. */
-  public void showRoute() {}
+    throw new CountryNotFoundException(countryInput);
+  }
 }
