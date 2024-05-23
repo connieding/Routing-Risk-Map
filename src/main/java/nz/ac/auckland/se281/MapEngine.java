@@ -6,6 +6,7 @@ import java.util.Set;
 
 /** This class is the main entry point. */
 public class MapEngine {
+  Graph<Country> countryGraph = new Graph<>();
   Set<Country> countryInfo = new HashSet<>();
   Country beginCountry;
   Country finalCountry;
@@ -21,7 +22,7 @@ public class MapEngine {
     List<String> adjacencies = Utils.readAdjacencies();
     // add code here to create your data structures
 
-    // Load the country information
+    // Load the country information and add node to graph
     for (String country : countries) {
       String[] countryData = country.split(",");
       String countryName = countryData[0].trim();
@@ -29,6 +30,21 @@ public class MapEngine {
       int countryTax = Integer.parseInt(countryData[2].trim());
 
       countryInfo.add(new Country(countryName, countryContinent, countryTax));
+      countryGraph.addNode(new Country(countryName, countryContinent, countryTax));
+    }
+
+    // Load the country adjacencies
+    for (String adjacency : adjacencies) {
+      String[] adjacencyData = adjacency.split(",");
+
+      for (String adjCountry : adjacencyData) {
+        try {
+          countryGraph.addEdge(
+              checkCountryName(adjacencyData[0].trim()), checkCountryName(adjCountry.trim()));
+        } catch (CountryNotFoundException e) {
+          e.printStackTrace();
+        }
+      }
     }
   }
 
@@ -87,6 +103,8 @@ public class MapEngine {
         System.out.println(e.getMessage());
       }
     }
+
+    // Find the shortest path between the two countries
   }
 
   public Country checkCountryName(String countryInput) throws CountryNotFoundException {
