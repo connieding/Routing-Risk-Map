@@ -105,6 +105,7 @@ public class MapEngine {
     }
 
     // Find the shortest path between the two countries
+    List<Country> countriesVisited = countryGraph.shortestPath(beginCountry, finalCountry);
   }
 
   public Country checkCountryName(String countryInput) throws CountryNotFoundException {
