@@ -2,6 +2,7 @@ package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -110,11 +111,14 @@ public class MapEngine {
 
     // need to get the country names from the list of Country objects
     List<String> countryNames = new ArrayList<>();
+    Set<String> continentNames = new LinkedHashSet<>();
     for (Country country : countriesVisited) {
       countryNames.add(country.getCountryName());
+      continentNames.add(country.getContinent());
     }
 
     MessageCli.ROUTE_INFO.printMessage("[" + String.join(", ", countryNames) + "]");
+    MessageCli.CONTINENT_INFO.printMessage("[" + String.join(", ", continentNames) + "]");
   }
 
   public Country checkCountryName(String countryInput) throws CountryNotFoundException {
