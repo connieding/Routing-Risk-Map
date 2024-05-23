@@ -1,6 +1,7 @@
 package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,26 +26,53 @@ public class Graph<Country> {
   }
 
   public List<Country> shortestPath(Country source, Country destination) {
-    List<Country> visited = new ArrayList<>();
+    // Map to keep track of the parent country of each country
+    Map<Country, Country> parentMap = new HashMap<>();
+
+    // List of keep track of visited countries
+    List<Country> visitedCountry = new ArrayList<>();
+
+    // Queue for BFS traversal
     Queue<Country> queue = new LinkedList<>();
 
     queue.add(source);
-    visited.add(source);
-    while (!queue.isEmpty()) {
+    visitedCountry.add(source);
+
+    // Source country has no parent country
+    parentMap.put(source, null);
+
+    // BFS traversal
+    while (!queue.isEmpty() && !visitedCountry.contains(destination)) {
+      // Dequeue the next country to process
       Country currentCountry = queue.poll();
+
+      // check if the destination country is reached
+      if (currentCountry.equals(destination)) {
+        break;
+      }
+
+      // Check the adjacent countries
       for (Country country : adjacencyCountry.get(currentCountry)) {
 
-        if (country.equals(destination)) {
-          visited.add(country);
-          return visited;
-        }
+        // if the country is not visited, add to visited and queue.
+        if (!visitedCountry.contains(country)) {
+          // if the country is not visited, add to visited and queue.
+          visitedCountry.add(country);
+          queue.add(country);
 
-        // if (!visited.contains(country)) {
-        //   visited.add(country);
-        //   queue.add(country);
-        // }
+          // set the parent country of the current country
+          parentMap.put(country, currentCountry);
+        }
       }
     }
-    return visited;
+
+    // Reconstruct the path from the parentMap
+    List<Country> path = new ArrayList<>();
+    for (Country country = destination; country != null; country = parentMap.get(country)) {
+      path.add(country);
+    }
+
+    Collections.reverse(path);
+    return path;
   }
 }
