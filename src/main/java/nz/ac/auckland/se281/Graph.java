@@ -8,32 +8,30 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-public class Graph<Country> {
-  private Map<Country, List<Country>> adjacencyCountry;
+public class Graph<T> {
+  private Map<T, List<T>> adjacencyCountry;
 
   public Graph() {
     this.adjacencyCountry = new HashMap<>();
   }
 
-  public void addNode(Country countryNode) {
+  public void addNode(T countryNode) {
     adjacencyCountry.putIfAbsent(countryNode, new LinkedList<>());
   }
 
-  public void addEdge(Country country, Country adjCountry) {
+  public void addEdge(T country, T adjCountry) {
     addNode(country);
     addNode(adjCountry);
     adjacencyCountry.get(country).add(adjCountry);
   }
 
-  public List<Country> shortestPath(Country source, Country destination) {
+  public List<T> shortestPath(T source, T destination) {
     // Map to keep track of the parent country of each country
-    Map<Country, Country> parentMap = new HashMap<>();
-
+    Map<T, T> parentMap = new HashMap<>();
     // List of keep track of visited countries
-    List<Country> visitedCountry = new ArrayList<>();
-
+    List<T> visitedCountry = new ArrayList<>();
     // Queue for BFS traversal
-    Queue<Country> queue = new LinkedList<>();
+    Queue<T> queue = new LinkedList<>();
 
     queue.add(source);
     visitedCountry.add(source);
@@ -44,7 +42,7 @@ public class Graph<Country> {
     // BFS traversal
     while (!queue.isEmpty() && !visitedCountry.contains(destination)) {
       // Dequeue the next country to process
-      Country currentCountry = queue.poll();
+      T currentCountry = queue.poll();
 
       // check if the destination country is reached
       if (currentCountry.equals(destination)) {
@@ -52,26 +50,27 @@ public class Graph<Country> {
       }
 
       // Check the adjacent countries
-      for (Country country : adjacencyCountry.get(currentCountry)) {
+      for (T country : adjacencyCountry.get(currentCountry)) {
 
         // if the country is not visited, add to visited and queue.
         if (!visitedCountry.contains(country)) {
-          // if the country is not visited, add to visited and queue.
           visitedCountry.add(country);
           queue.add(country);
 
-          // set the parent country of the current country
+          // set current country as the parent country of the adjacent country
           parentMap.put(country, currentCountry);
         }
       }
     }
 
     // Reconstruct the path from the parentMap
-    List<Country> path = new ArrayList<>();
-    for (Country country = destination; country != null; country = parentMap.get(country)) {
+    List<T> path = new ArrayList<>();
+    // Backtrack from the destination country to the source country where parent country is null
+    for (T country = destination; country != null; country = parentMap.get(country)) {
       path.add(country);
     }
 
+    // Reverse the path to get the correct order
     Collections.reverse(path);
     return path;
   }
