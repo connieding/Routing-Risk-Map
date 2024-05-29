@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+/** Represents a country. */
 public class Country {
   private String countryName;
   private String continent;
@@ -21,13 +22,23 @@ public class Country {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj) return true;
-    if (obj == null) return false;
-    if (getClass() != obj.getClass()) return false;
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
     Country other = (Country) obj;
     if (countryName == null) {
-      if (other.countryName != null) return false;
-    } else if (!countryName.equals(other.countryName)) return false;
+      if (other.countryName != null) {
+        return false;
+      }
+    } else if (!countryName.equals(other.countryName)) {
+      return false;
+    }
     return true;
   }
 

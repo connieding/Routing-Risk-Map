@@ -133,6 +133,13 @@ public class MapEngine {
     }
   }
 
+  /**
+   * Check if the user country input exists in the countryInfo set.
+   *
+   * @param countryInput the country name input by the user
+   * @return the country object if it exists
+   * @throws CountryNotFoundException if the country does not exist
+   */
   public Country checkCountryName(String countryInput) throws CountryNotFoundException {
 
     // Check if the user country input exists in the countryInfo set

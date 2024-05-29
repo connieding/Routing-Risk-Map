@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
+/**
+ * A generic graph class to represent the countries and their connections.
+ *
+ * @param <T> the type of the country node
+ */
 public class Graph<T> {
   private Map<T, List<T>> adjacencyCountry;
 
@@ -19,12 +24,25 @@ public class Graph<T> {
     adjacencyCountry.putIfAbsent(countryNode, new LinkedList<>());
   }
 
+  /**
+   * Add an edge between two countries.
+   *
+   * @param country the source country
+   * @param adjCountry the adjacent country
+   */
   public void addEdge(T country, T adjCountry) {
     addNode(country);
     addNode(adjCountry);
     adjacencyCountry.get(country).add(adjCountry);
   }
 
+  /**
+   * Find the shortest path between two countries using BFS traversal.
+   *
+   * @param source the source country
+   * @param destination the destination country
+   * @return the list of countries in the shortest path
+   */
   public List<T> findShortestPath(T source, T destination) {
     // Map to keep track of the parent country of each country
     Map<T, T> parentMap = new HashMap<>();
