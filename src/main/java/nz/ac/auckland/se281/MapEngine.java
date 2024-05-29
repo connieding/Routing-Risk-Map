@@ -8,13 +8,13 @@ import java.util.Set;
 
 /** This class is the main entry point. */
 public class MapEngine {
-  Graph<Country> countryGraph = new Graph<>();
-  Set<Country> countryInfo = new HashSet<>();
-  Set<String> continentNames = new LinkedHashSet<>();
-  List<String> countryNames = new ArrayList<>();
-  int totalTax = 0;
-  Country beginCountry;
-  Country finalCountry;
+  private Graph<Country> countryGraph = new Graph<>();
+  private Set<Country> countryInfo = new HashSet<>();
+  private Set<String> continentNames = new LinkedHashSet<>();
+  private List<String> countryNames = new ArrayList<>();
+  private int totalTax = 0;
+  private Country beginCountry;
+  private Country finalCountry;
 
   public MapEngine() {
     // add other code here if you want
