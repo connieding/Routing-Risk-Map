@@ -25,7 +25,7 @@ public class Graph<T> {
     adjacencyCountry.get(country).add(adjCountry);
   }
 
-  public List<T> shortestPath(T source, T destination) {
+  public List<T> findShortestPath(T source, T destination) {
     // Map to keep track of the parent country of each country
     Map<T, T> parentMap = new HashMap<>();
     // List of keep track of visited countries

@@ -112,7 +112,7 @@ public class MapEngine {
     }
 
     // Find the shortest path between the two countries
-    List<Country> countriesVisited = countryGraph.shortestPath(beginCountry, finalCountry);
+    List<Country> countriesVisited = countryGraph.findShortestPath(beginCountry, finalCountry);
 
     // If the countriesVisited list is empty, then no path exists
     if (countriesVisited.size() == 1) {
