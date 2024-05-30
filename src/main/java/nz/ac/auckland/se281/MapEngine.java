@@ -12,6 +12,7 @@ public class MapEngine {
   private Set<Country> countryInfo = new HashSet<>();
   private Set<String> continentNames = new LinkedHashSet<>();
   private List<String> countryNames = new ArrayList<>();
+  private List<Country> countriesVisited = new ArrayList<>();
   private int totalTax = 0;
   private Country beginCountry;
   private Country finalCountry;
@@ -111,8 +112,14 @@ public class MapEngine {
       }
     }
 
+    // Clear the lists and variables
+    countriesVisited.clear();
+    countryNames.clear();
+    continentNames.clear();
+    totalTax = 0;
+
     // Find the shortest path between the two countries
-    List<Country> countriesVisited = countryGraph.findShortestPath(beginCountry, finalCountry);
+    countriesVisited = countryGraph.findShortestPath(beginCountry, finalCountry);
 
     // If the countriesVisited list is empty, then no path exists
     if (countriesVisited.size() == 1) {
