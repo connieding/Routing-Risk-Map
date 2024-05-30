@@ -26,6 +26,7 @@ public class Country {
    */
   @Override
   public int hashCode() {
+    // Generate a hash code for the country
     final int prime = 31;
     int result = 1;
     result = prime * result + ((countryName == null) ? 0 : countryName.hashCode());
@@ -40,16 +41,20 @@ public class Country {
    */
   @Override
   public boolean equals(Object obj) {
+    // Check if the object is the same
     if (this == obj) {
       return true;
     }
+    // Check if the object is null
     if (obj == null) {
       return false;
     }
+    // Check if the object is an instance of Country
     if (getClass() != obj.getClass()) {
       return false;
     }
     Country other = (Country) obj;
+    // Check if the country name is the same
     if (countryName == null) {
       if (other.countryName != null) {
         return false;
