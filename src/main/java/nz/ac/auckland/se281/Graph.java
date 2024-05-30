@@ -50,6 +50,8 @@ public class Graph<T> {
     List<T> visitedCountry = new ArrayList<>();
     // Queue for BFS traversal
     Queue<T> queue = new LinkedList<>();
+    // List to keep track of the path
+    List<T> path = new ArrayList<>();
 
     queue.add(source);
     visitedCountry.add(source);
@@ -82,7 +84,6 @@ public class Graph<T> {
     }
 
     // Reconstruct the path from the parentMap
-    List<T> path = new ArrayList<>();
     // Backtrack from the destination country to the source country where parent country is null
     for (T country = destination; country != null; country = parentMap.get(country)) {
       path.add(country);
