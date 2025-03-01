@@ -12,7 +12,7 @@ The Routing Application is a Java-based solution designed to efficiently manage 
 
 ## Installation
 
-To get started with the Event Venue Booking System, make sure you have **Java** installed on your machine. 
+To get started with the Routing Risk Map, make sure you have **Java** installed on your machine. 
 Follow the steps below to set up and run the project:
 
 1. **Clone the repository**:
